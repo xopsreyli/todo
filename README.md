@@ -6,6 +6,10 @@ A simple todo app where you can add tasks, mark them as done, and filter them by
 
 ![Todo App screenshot](./public/img/intro.png)
 
+To see the test coverage, visit **[Test coverage](https://xopsreyli.github.io/todo/coverage)**.
+
+To see the documentation, visit **[Documentation](https://xopsreyli.github.io/todo/docs)**.
+
 ## Tech Stack
 
 - [React](https://react.dev/)
