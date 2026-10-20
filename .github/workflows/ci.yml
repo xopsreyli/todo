@@ -24,6 +24,10 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
 
   build:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -37,6 +41,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: npm run docs
+      - uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
+      - name: Add coverage and docs to the site
+        run: |
+          mkdir -p dist/coverage dist/docs
+          cp -r coverage/. dist/coverage/
+          cp -r docs/. dist/docs/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
