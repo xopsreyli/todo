@@ -1,0 +1,13 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+}
+
+.delete-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

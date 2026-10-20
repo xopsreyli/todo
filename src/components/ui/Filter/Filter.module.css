@@ -1,0 +1,13 @@
+.filter {
+    display: flex;
+    gap: 1px;
+    background-color: #eee;
+    border: 1px solid #eee;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    &:has(input:focus) {
+        background-color: greenyellow;
+        border: 1px solid greenyellow;
+    }
+}

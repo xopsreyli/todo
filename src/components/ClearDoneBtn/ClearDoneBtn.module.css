@@ -1,0 +1,26 @@
+.btn {
+    cursor: pointer;
+    opacity: 1;
+    outline: none;
+    border: 2px solid crimson;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: #eee;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition:
+            color 0.2s ease,
+            opacity 2s ease;
+
+    @starting-style {
+        opacity: 0;
+    }
+
+    &:hover,
+    &:focus {
+        color: crimson;
+    }
+    &:active {
+        color: #111;
+    }
+}
