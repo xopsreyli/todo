@@ -101,7 +101,7 @@ describe(`App`, () => {
         const task = {
             id: `1`,
             text: `test task`,
-            isCompleted: true
+            isCompleted: false
         }
         localStorage.setItem(`tasks`, JSON.stringify([task]))
         setup()

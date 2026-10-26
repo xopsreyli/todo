@@ -6,6 +6,7 @@
     border-radius: 0.5rem;
     background-color: crimson;
     color: #111;
+    font-size: 0.875rem;
     font-weight: bold;
     padding: 0.5rem 1rem;
     transition:
@@ -19,5 +20,11 @@
     &:hover,
     &:focus {
         box-shadow: 0 0 8px crimson;
+    }
+}
+
+@media screen and (max-width: 545px) {
+    .btn {
+        font-size: 0.8rem;
     }
 }

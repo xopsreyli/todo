@@ -1,5 +1,6 @@
 * {
   font-family: sans-serif;
+  line-height: 1;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -7,4 +8,10 @@
 
 body {
   background-color: #111;
+}
+
+@media screen and (max-width: 545px) {
+  html {
+    font-size: 125%;
+  }
 }

@@ -29,7 +29,7 @@ const Task = ({task}) => {
     } = useTasks()
 
     const handleCheck = () => {
-        if(!isCompleted) completeTask(id)
+        completeTask(id)
     }
 
     const handleDelete = () => {
@@ -44,21 +44,23 @@ const Task = ({task}) => {
             ].join(' ')}
         >
             <span className={styles.task__text}>{text}</span>
-            <div className={styles.task__actions}>
-                <label className={styles.task__status} htmlFor={id}>
-                    <input
-                        type="checkbox"
-                        id={id}
-                        checked={isCompleted}
-                        onChange={handleCheck}
-                    />
-                </label>
-                <button
-                    className={styles.task__delete}
-                    onClick={handleDelete}
-                >delete
-                </button>
-            </div>
+            {!isCompleted && (
+                <div className={styles.task__actions}>
+                    <label className={styles.task__status} htmlFor={id}>
+                        <input
+                            type="checkbox"
+                            id={id}
+                            checked={isCompleted}
+                            onChange={handleCheck}
+                        />
+                    </label>
+                    <button
+                        className={styles.task__delete}
+                        onClick={handleDelete}
+                    >delete
+                    </button>
+                </div>
+            )}
         </li>
     );
 };

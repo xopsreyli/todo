@@ -5,6 +5,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   base: '/todo/',
+  server: {
+    allowedHosts: ['.ngrok-free.app'],
+  },
   test: {
     globals: true,
     environment: 'jsdom',

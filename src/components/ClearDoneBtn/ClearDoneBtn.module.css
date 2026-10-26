@@ -6,6 +6,7 @@
     border-radius: 0.5rem;
     background-color: transparent;
     color: #eee;
+    font-size: 0.875rem;
     font-weight: bold;
     padding: 0.5rem 1rem;
     transition:
@@ -22,5 +23,11 @@
     }
     &:active {
         color: #111;
+    }
+}
+
+@media screen and (max-width: 545px) {
+    .btn {
+        font-size: 0.8rem;
     }
 }
