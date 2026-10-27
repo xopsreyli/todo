@@ -6,7 +6,7 @@
     border-radius: 0.5rem;
     overflow: hidden;
 
-    &:has(input:focus) {
+    &:has(input:focus-visible) {
         background-color: greenyellow;
         border: 1px solid greenyellow;
     }
