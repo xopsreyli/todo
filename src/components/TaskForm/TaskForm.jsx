@@ -32,21 +32,20 @@ const TaskForm = () => {
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.form__field}>
-                <label className={styles.form__label} htmlFor="taskInput">Enter task:</label>
-                <input
-                    className={styles.form__input}
-                    type="text"
-                    id='taskInput'
-                    value={task}
-                    onChange={handleChange}
-                />
-            </div>
+            <input
+                className={styles.form__input}
+                type="text"
+                id='taskInput'
+                value={task}
+                onChange={handleChange}
+                placeholder="New task"
+                aria-label={`Enter new task`}
+            />
             <button
                 className={styles.form__submit}
                 type="submit"
                 disabled={!task.trim()}
-            >create</button>
+            >add</button>
         </form>
     );
 };

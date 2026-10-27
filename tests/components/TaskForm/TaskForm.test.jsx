@@ -8,9 +8,9 @@ vi.mock("../../../src/hooks/useTasks/useTasks.js" )
 describe(`component TaskForm`, () => {
     let user
 
-    const getTaskInput = () => screen.getByLabelText(/enter task:/i)
+    const getTaskInput = () => screen.getByLabelText(/enter new task/i)
     const getSubmitBtn = () => screen.getByRole(`button`, {
-        name: /create/i
+        name: /add/i
     })    
     
     const createTask = vi.fn()
@@ -39,11 +39,12 @@ describe(`component TaskForm`, () => {
 
     describe(`element task input`, () => {
         it(`changes value on typing`, async () => {
+            const text = `test text`
             expect(getTaskInput()).toHaveValue(``)
 
-            await user.type(getTaskInput(), `test text`)
+            await user.type(getTaskInput(), text)
 
-            expect(getTaskInput()).toHaveValue(`test text`)
+            expect(getTaskInput()).toHaveValue(text)
         })
     })
 

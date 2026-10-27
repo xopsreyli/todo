@@ -21,8 +21,8 @@ describe(`App`, () => {
 
         expect(screen.queryByText(taskText)).not.toBeInTheDocument()
 
-        await user.type(screen.getByLabelText(/enter task:/i), taskText)
-        await user.click(screen.getByRole(`button`, { name: /create/i }))
+        await user.type(screen.getByLabelText(/enter new task/i), taskText)
+        await user.click(screen.getByRole(`button`, { name: /add/i }))
 
         expect(screen.getByText(taskText)).toBeInTheDocument()
     })
