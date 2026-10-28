@@ -1,5 +1,7 @@
 import styles from './Task.module.css';
 import useTasks from "../../../hooks/useTasks/useTasks.js";
+import CheckMark from '../../../assets/svg/check-mark.svg?react'
+import CrossIcon from '../../../assets/svg/cross.svg?react'
 
 /** @module components/TaskList/Task */
 
@@ -41,6 +43,7 @@ const Task = ({task}) => {
             className={styles.task}
         >
             <label className={styles.task__status} htmlFor={id}>
+                <CheckMark className={styles[`check-mark`]} />
                 <input
                     type="checkbox"
                     id={id}
@@ -53,7 +56,9 @@ const Task = ({task}) => {
                 className={styles.task__delete}
                 onClick={handleDelete}
                 aria-label={`Delete task`}
-            ></button>
+            >
+                <CrossIcon className={styles[`cross-icon`]} />
+            </button>
         </li>
     );
 };
