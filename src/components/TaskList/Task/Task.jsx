@@ -29,7 +29,7 @@ const Task = ({task}) => {
     } = useTasks()
 
     const handleCheck = () => {
-        completeTask(id)
+        if (!isCompleted) completeTask(id)
     }
 
     const handleDelete = () => {
@@ -38,29 +38,22 @@ const Task = ({task}) => {
 
     return (
         <li
-            className={[
-                styles.task,
-                isCompleted && styles['task--completed']
-            ].join(' ')}
+            className={styles.task}
         >
+            <label className={styles.task__status} htmlFor={id}>
+                <input
+                    type="checkbox"
+                    id={id}
+                    checked={isCompleted}
+                    onChange={handleCheck}
+                />
+            </label>
             <span className={styles.task__text}>{text}</span>
-            {!isCompleted && (
-                <div className={styles.task__actions}>
-                    <label className={styles.task__status} htmlFor={id}>
-                        <input
-                            type="checkbox"
-                            id={id}
-                            checked={isCompleted}
-                            onChange={handleCheck}
-                        />
-                    </label>
-                    <button
-                        className={styles.task__delete}
-                        onClick={handleDelete}
-                    >delete
-                    </button>
-                </div>
-            )}
+            <button
+                className={styles.task__delete}
+                onClick={handleDelete}
+                aria-label={`Delete task`}
+            ></button>
         </li>
     );
 };
