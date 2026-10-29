@@ -1,5 +1,7 @@
 import useTasks from "../../hooks/useTasks/useTasks.js";
 import styles from './DeleteAllBtn.module.css'
+import delayAction from "../../utils/delayAction/delayAction.js";
+import {useEffect, useRef} from "react";
 
 /** @module components/DeleteAllBtn */
 
@@ -17,13 +19,29 @@ const DeleteAllBtn = () => {
         tasks,
         deleteTasks
     } = useTasks()
+    const timeoutRef = useRef(null)
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timeoutRef.current)
+        }
+    }, [])
+
+    const handleClick = () => {
+        if (timeoutRef.current) return
+
+        timeoutRef.current = delayAction(() => {
+            deleteTasks()
+            timeoutRef.current = null
+        }, 500)
+    }
 
     if (tasks.length === 0) return null
 
     return (
         <button
             className={styles.btn}
-            onClick={deleteTasks}
+            onClick={handleClick}
         >Delete All</button>
     );
 };

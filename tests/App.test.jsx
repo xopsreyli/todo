@@ -1,4 +1,4 @@
-import {screen, render, within} from "@testing-library/react";
+import {screen, render, within, waitFor} from "@testing-library/react";
 import App from "../src/App.jsx";
 import userEvent from "@testing-library/user-event";
 
@@ -93,8 +93,10 @@ describe(`App`, () => {
 
         await user.click(within(testTask).getByRole(`checkbox`))
 
-        expect(within(activeList).getAllByRole(`listitem`)).toHaveLength(1)
-        expect(within(doneList).getAllByRole(`listitem`)).toHaveLength(2)
+        await waitFor(() => {
+            expect(within(activeList).getAllByRole(`listitem`)).toHaveLength(1)
+            expect(within(doneList).getAllByRole(`listitem`)).toHaveLength(2)
+        })
     })
 
     it(`lets user delete task`, async () => {
@@ -110,7 +112,9 @@ describe(`App`, () => {
 
         await user.click(within(screen.getByText(task.text).closest(`li`)).getByRole(`button`, { name: /delete/i }))
 
-        expect(screen.queryByText(task.text)).not.toBeInTheDocument()
+        await waitFor(() => {
+            expect(screen.queryByText(task.text)).not.toBeInTheDocument()
+        })
     })
 
     it(`lets user delete all done tasks`, async () => {
@@ -137,8 +141,10 @@ describe(`App`, () => {
 
         await user.click(screen.getByRole(`button`, { name: /clear done/i }))
 
-        expect(within(activeList).getAllByRole(`listitem`)).toHaveLength(1)
-        expect(screen.queryByRole(`list`, { name: `Done tasks` })).not.toBeInTheDocument()
+        await waitFor(() => {
+            expect(within(activeList).getAllByRole(`listitem`)).toHaveLength(1)
+            expect(screen.queryByRole(`list`, { name: `Done tasks` })).not.toBeInTheDocument()
+        })
     })
 
     it(`lets user delete all tasks`, async () => {
@@ -162,7 +168,9 @@ describe(`App`, () => {
 
         await user.click(screen.getByRole(`button`, { name: /delete all/i }))
 
-        expect(screen.queryByText(tasks[0].text)).not.toBeInTheDocument()
-        expect(screen.queryByText(tasks[1].text)).not.toBeInTheDocument()
+        await waitFor(() => {
+            expect(screen.queryByText(tasks[0].text)).not.toBeInTheDocument()
+            expect(screen.queryByText(tasks[1].text)).not.toBeInTheDocument()
+        })
     })
 })

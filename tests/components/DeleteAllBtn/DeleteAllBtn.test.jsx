@@ -1,5 +1,5 @@
 import useTasks from "../../../src/hooks/useTasks/useTasks.js"
-import {screen, render} from "@testing-library/react";
+import {screen, render, waitFor} from "@testing-library/react";
 import DeleteAllBtn from "../../../src/components/DeleteAllBtn/DeleteAllBtn.jsx";
 import userEvent from "@testing-library/user-event";
 
@@ -60,6 +60,36 @@ describe(`component DeleteAllBtn`, () => {
             name: /delete all/i
         }))
 
-        expect(deleteTasks).toHaveBeenCalledOnce()
+        await waitFor(() => {
+            expect(deleteTasks).toHaveBeenCalledOnce()
+        })
+    })
+
+    it(`calls deleteTasks once if more than 1 click was done`, async () => {
+        useTasks.mockReturnValue({
+            tasks: [{
+                id: `1`,
+                text: 'test text',
+                isCompleted: false,
+            }],
+            deleteTasks
+        })
+
+        const user = userEvent.setup()
+
+        render(<DeleteAllBtn />)
+
+        expect(deleteTasks).not.toHaveBeenCalled()
+
+        await user.click(screen.getByRole(`button`, {
+            name: /delete all/i
+        }))
+        await user.click(screen.getByRole(`button`, {
+            name: /delete all/i
+        }))
+
+        await waitFor(() => {
+            expect(deleteTasks).toHaveBeenCalledOnce()
+        })
     })
 })

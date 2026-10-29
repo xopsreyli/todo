@@ -2,6 +2,8 @@ import styles from './Task.module.css';
 import useTasks from "../../../hooks/useTasks/useTasks.js";
 import CheckMark from '../../../assets/svg/check-mark.svg?react'
 import CrossIcon from '../../../assets/svg/cross.svg?react'
+import {useEffect, useRef} from "react";
+import delayAction from "../../../utils/delayAction/delayAction.js";
 
 /** @module components/TaskList/Task */
 
@@ -29,13 +31,32 @@ const Task = ({task}) => {
         completeTask,
         deleteTask,
     } = useTasks()
+    const completeTimeout = useRef(null)
+    const deleteTimeout = useRef(null)
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(completeTimeout.current)
+            clearTimeout(deleteTimeout.current)
+        }
+    }, [])
 
     const handleCheck = () => {
-        if (!isCompleted) completeTask(id)
+        if (completeTimeout.current) return
+
+        completeTimeout.current = delayAction(() => {
+            completeTask(id)
+            completeTimeout.current = null
+        }, 500)
     }
 
     const handleDelete = () => {
-        deleteTask(id)
+        if (deleteTimeout.current) return
+
+        deleteTimeout.current = delayAction(() => {
+            deleteTask(id)
+            deleteTimeout.current = null
+        }, 500)
     }
 
     return (

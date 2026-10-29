@@ -1,5 +1,5 @@
 import useTasks from "../../../../src/hooks/useTasks/useTasks.js"
-import {screen, render} from "@testing-library/react";
+import {screen, render, waitFor} from "@testing-library/react";
 import Task from "../../../../src/components/TaskList/Task/Task.jsx";
 import userEvent from "@testing-library/user-event";
 
@@ -43,6 +43,7 @@ describe(`component Task`, () => {
             const checkbox = screen.getByRole(`checkbox`)
 
             expect(checkbox).not.toBeChecked()
+            expect(checkbox).toBeEnabled()
         })
 
         it(`calls completeTask on checkbox click`, async () => {
@@ -50,7 +51,9 @@ describe(`component Task`, () => {
 
             await user.click(screen.getByRole(`checkbox`))
 
-            expect(completeTask).toHaveBeenCalledWith(activeTask.id)
+            await waitFor(() => {
+                expect(completeTask).toHaveBeenCalledWith(activeTask.id)
+            })
         })
 
         it(`calls deleteTask on delete button click`, async () => {
@@ -58,7 +61,31 @@ describe(`component Task`, () => {
 
             await user.click(screen.getByRole(`button`, { name: /delete/i }))
 
-            expect(deleteTask).toHaveBeenCalledWith(doneTask.id)
+            await waitFor(() => {
+                expect(deleteTask).toHaveBeenCalledWith(doneTask.id)
+            })
+        })
+
+        it(`call completeTask once after 2 clicks on checkbox`, async () => {
+            const user = userEvent.setup()
+
+            await user.click(screen.getByRole(`checkbox`))
+            await user.click(screen.getByRole(`checkbox`))
+
+            await waitFor(() => {
+                expect(completeTask).toHaveBeenCalledWith(activeTask.id)
+            })
+        })
+
+        it(`call deleteTask once after 2 clicks on button`, async () => {
+            const user = userEvent.setup()
+
+            await user.click(screen.getByRole(`button`, { name: /delete/i }))
+            await user.click(screen.getByRole(`button`, { name: /delete/i }))
+
+            await waitFor(() => {
+                expect(deleteTask).toHaveBeenCalledWith(doneTask.id)
+            })
         })
     })
 
@@ -78,14 +105,7 @@ describe(`component Task`, () => {
             const checkbox = screen.getByRole(`checkbox`)
 
             expect(checkbox).toBeChecked()
-        })
-
-        it(`does not call completeTask on checkbox click`, async () => {
-            const user = userEvent.setup()
-
-            await user.click(screen.getByRole(`checkbox`))
-
-            expect(completeTask).not.toHaveBeenCalled()
+            expect(checkbox).toBeDisabled()
         })
 
         it(`calls deleteTask on delete button click`, async () => {
@@ -93,7 +113,9 @@ describe(`component Task`, () => {
 
             await user.click(screen.getByRole(`button`, { name: /delete/i }))
 
-            expect(deleteTask).toHaveBeenCalledWith(doneTask.id)
+            await waitFor(() => {
+                expect(deleteTask).toHaveBeenCalledWith(doneTask.id)
+            })
         })
     })
 })
