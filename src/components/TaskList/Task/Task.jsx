@@ -49,6 +49,7 @@ const Task = ({task}) => {
                     id={id}
                     checked={isCompleted}
                     onChange={handleCheck}
+                    disabled={isCompleted}
                 />
             </label>
             <span className={styles.task__text}>{text}</span>
