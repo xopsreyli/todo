@@ -37,7 +37,7 @@ const ClearDoneBtn = () => {
         timeoutRef.current = delayAction(() => {
             deleteCompletedTasks()
             timeoutRef.current = null
-        }, 500)
+        }, 200)
     }
 
     if (completedTasks.length === 0) return null

@@ -47,7 +47,7 @@ const Task = ({task}) => {
         completeTimeout.current = delayAction(() => {
             completeTask(id)
             completeTimeout.current = null
-        }, 500)
+        }, 200)
     }
 
     const handleDelete = () => {
@@ -56,7 +56,7 @@ const Task = ({task}) => {
         deleteTimeout.current = delayAction(() => {
             deleteTask(id)
             deleteTimeout.current = null
-        }, 500)
+        }, 200)
     }
 
     return (

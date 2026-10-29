@@ -18,15 +18,10 @@
         padding: 1em;
         transition: box-shadow 0.2s;
 
-        &:hover {
-            box-shadow:
-                    inset 0 4px 8px rgba(0, 0, 0, 0.8),
-                    0 1px 0 greenyellow;
-        }
-
+        &:hover,
         &:focus {
             box-shadow:
-                    inset 0 1px 8px rgba(0, 0, 0, 0.8),
+                    inset 0 4px 8px rgba(0, 0, 0, 0.8),
                     0 1px 0 greenyellow;
         }
     }
@@ -47,33 +42,38 @@
         font-weight: bold;
         padding: 0.75em 1em;
         transition:
+                opacity 0.2s,
                 box-shadow 0.2s,
-                transform 0.2s  ;
+                transform 0.2s;
 
-        &:disabled {
-            cursor: auto;
-            opacity: 0.5;
-
-            &:hover {
-                box-shadow:
-                        0 4px 2px rgba(173, 255, 47, 0.5),
-                        inset 0 4px 8px rgba(255, 255, 255, 0.5);
-            }
-        }
         &:hover {
             box-shadow:
                     0 0 0 rgba(173, 255, 47, 0.5),
                     inset 0 4px 8px rgba(255, 255, 255, 0.5),
                     inset 0 -4px 8px rgba(0, 0, 0, 0.5);
         }
-        &:active {
-            transform: scale(0.95);
-        }
-        &:focus {
+
+        &:focus-visible {
             box-shadow:
                     0 0 0 rgba(173, 255, 47, 0.5),
                     inset 0 4px 8px rgba(255, 255, 255, 0.5),
                     inset 0 -4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        &:active {
+            opacity: 0.25;
+        }
+
+        &:disabled {
+            cursor: auto;
+            opacity: 0.5;
+            transform: none;
+
+            &:hover {
+                box-shadow:
+                        0 4px 2px rgba(173, 255, 47, 0.5),
+                        inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            }
         }
     }
 }
@@ -85,23 +85,12 @@
         }
 
         .form__submit {
-            box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            box-shadow:
+                    inset 0 4px 8px rgba(255, 255, 255, 0.5),
+                    inset 0 -4px 8px rgba(0, 0, 0, 0.5);
             font-size: 0.8rem;
 
-            &:disabled {
-                &:hover {
-                    box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.5);
-                }
-            }
-            &:hover {
-                box-shadow:
-                        inset 0 4px 8px rgba(255, 255, 255, 0.5),
-                        inset 0 -4px 8px rgba(0, 0, 0, 0.5);
-            }
-            &:active {
-                transform: scale(0.95);
-            }
-            &:focus {
+            &:disabled:hover {
                 box-shadow:
                         inset 0 4px 8px rgba(255, 255, 255, 0.5),
                         inset 0 -4px 8px rgba(0, 0, 0, 0.5);

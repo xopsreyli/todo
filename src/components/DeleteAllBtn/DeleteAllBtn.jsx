@@ -33,7 +33,7 @@ const DeleteAllBtn = () => {
         timeoutRef.current = delayAction(() => {
             deleteTasks()
             timeoutRef.current = null
-        }, 500)
+        }, 200)
     }
 
     if (tasks.length === 0) return null
