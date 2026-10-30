@@ -19,8 +19,10 @@
         }
     }
 
-    &:hover span {
-        color: greenyellow;
+    @media (hover: hover) {
+        &:hover span {
+            color: greenyellow;
+        }
     }
 
     &:has(input:checked) {

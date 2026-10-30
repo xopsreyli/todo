@@ -14,39 +14,43 @@
     padding: 0.5em 1em;
     transition:
             box-shadow 0.2s,
+            transform 0.2s,
             opacity 2s ease;
 
     @starting-style {
         opacity: 0;
     }
 
-    &:hover,
+    @media (hover: hover) {
+        &:hover {
+            box-shadow:
+                    inset 0 4px 8px rgba(255, 255, 255, 0.2),
+                    inset 0 -4px 8px rgba(0, 0, 0, 0.5),
+                    0 0 8px crimson;
+        }
+    }
+
     &:focus-visible {
         box-shadow:
-                0 0 8px crimson,
                 inset 0 4px 8px rgba(255, 255, 255, 0.2),
-                inset 0 -4px 8px rgba(0, 0, 0, 0.5);
+                inset 0 -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 8px crimson;
     }
 
     &:active {
         box-shadow:
                 inset 0 4px 8px rgba(255, 255, 255, 0.2),
                 inset 0 -4px 8px rgba(0, 0, 0, 0.5);
+        transform: scale(0.95);
+        transition:
+                box-shadow 0s,
+                transform 0s,
+                opacity 2s ease;
     }
 }
 
 @media screen and (max-width: 545px) {
     .btn {
         font-size: 0.9rem;
-
-        &:hover {
-            box-shadow:
-                    inset 0 4px 8px rgba(255, 255, 255, 0.2),
-                    inset 0 -4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        &:active {
-            color: crimson;
-        }
     }
 }
